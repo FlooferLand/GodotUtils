@@ -148,4 +148,11 @@ public static class Extensions {
 	) => InternalPlaySfx(self, stream, pitchRandomOffset, pitchOffset);
 	#endregion
 	#endregion
+
+	#region Color extensions
+	[Pure] public static Color WithR(this Color self, float r) => new(r, self.G, self.B, self.A);
+	[Pure] public static Color WithG(this Color self, float g) => new(self.R, g, self.B, self.A);
+	[Pure] public static Color WithB(this Color self, float b) => new(self.R, self.G, b, self.A);
+	[Pure] public static Color WithA(this Color self, float a) => new(self.R, self.G, self.B, a);
+	#endregion
 }
