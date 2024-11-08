@@ -102,6 +102,15 @@ public static class Extensions {
 		);
 	}
 	#endregion
+
+	#region Quaternion
+	public static bool IsEqualApprox(this Quaternion self, Quaternion other, float tolerance) {
+		return Mathf.IsEqualApprox(self.X, other.X, tolerance)
+		       && Mathf.IsEqualApprox(self.Y, other.Y, tolerance)
+		       && Mathf.IsEqualApprox(self.Z, other.Z, tolerance)
+		       && Mathf.IsEqualApprox(self.W, other.W, tolerance);
+	}
+	#endregion
 	
 	#region AudioStreamPlayer extensions
 	/// <summary>
