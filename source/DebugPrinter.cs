@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace GodotUtils;
 using Godot;
 
@@ -98,7 +100,7 @@ public partial class DebugPrinter : Node {
 		if (SelfCached == null) {
 			SelfCached = new DebugPrinter();
 			SelfCached.Name = nodeName;
-			root.AddChild(SelfCached, true);
+			root.CallDeferred(Node.MethodName.AddChild, SelfCached, true);
 			return SelfCached;
 		}
 		return SelfCached;

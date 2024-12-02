@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
@@ -5,7 +6,7 @@ namespace Project;
 
 /// <summary>
 /// Safety type that either holds a value or an error <br/>
-/// Similar (and compatible) with <see cref="Result{TOk,TErr}"/>, but this uses a <see cref="String"/> for the error by default
+/// Similar (and compatible) with <see cref="Result{TOk,TErr}"/>, but this uses a <see cref="string"/> for the error by default
 /// </summary>
 /// <typeparam name="TOk">The value that might be held inside the type</typeparam>
 [SuppressMessage("ReSharper", "UnusedType.Global")]
