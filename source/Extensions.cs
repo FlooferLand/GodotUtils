@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿#nullable enable
+using Godot;
 using System.Diagnostics.Contracts;
 
 namespace GodotUtils;
@@ -119,7 +120,7 @@ public static class Extensions {
 	/// Plays a sound effect while randomizing the pitch.
 	/// If an <c>AudioStream</c> is not specified, it will play the current stream.
 	/// </summary>
-	private static void InternalPlaySfx(
+	static void InternalPlaySfx(
 		Node audio,
         AudioStream? stream = null,
 		float pitchRandomOffset = 0f,

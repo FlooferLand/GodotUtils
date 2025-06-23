@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -14,13 +15,13 @@ public class Result<TOk> : Result<TOk, String> {
     protected Result(TOk value, String error, Boolean isOk) : base(value, error, isOk) { }
     
     /** Stores a value */
-    public static Result<TOk> Ok(TOk value) {
-        return new Result<TOk>(value, default, true);
+    public new static Result<TOk> Ok(TOk value) {
+        return new Result<TOk>(value, null!, true);
     }
     
     /** Stores an error */
-    public static Result<TOk> Err(String error) {
-        return new Result<TOk>(default, error, false);
+    public new static Result<TOk> Err(String error) {
+        return new Result<TOk>(default!, error, false);
     }
 }
 
@@ -31,9 +32,9 @@ public class Result<TOk> : Result<TOk, String> {
 /// <typeparam name="TErr">The error that might be held inside the type</typeparam>
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 public class Result<TOk, TErr> {
-    private readonly TOk value;
-    private readonly TErr error;
-    private readonly bool isOk;
+    readonly TOk value;
+    readonly TErr error;
+    readonly bool isOk;
 
     public bool IsOk => (value != null && isOk);
 
@@ -46,12 +47,12 @@ public class Result<TOk, TErr> {
     
     /** Stores a value */
     public static Result<TOk, TErr> Ok(TOk value) {
-        return new Result<TOk, TErr>(value, default, true);
+        return new Result<TOk, TErr>(value, default!, true);
     }
     
     /** Stores an error */
     public static Result<TOk, TErr> Err(TErr error) {
-        return new Result<TOk, TErr>(default, error, false);
+        return new Result<TOk, TErr>(default!, error, false);
     }
     
     /** Stores a value if the condition is true, otherwise it stores an error */

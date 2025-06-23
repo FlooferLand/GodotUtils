@@ -4,7 +4,7 @@ using Godot;
 /// Bus/effect focused wrapper around AudioServer
 /// <b>Heavily recommended for safety to only use this class at startup and cache the results</b>
 public class AudioMixerBus {
-	private readonly int busId;
+	readonly int busId;
 	public AudioMixerBus(int id) {
 		busId = id;
 	}

@@ -1,8 +1,9 @@
+#nullable enable
 using Godot;
 namespace GodotUtils;
 
 public static class Log {
-	private static string stabilityWarning = "The game may be unstable from now on.";
+	static string stabilityWarning = "The game may be unstable from now on.";
 	
 	public delegate void LogConfigurator(out string stabilityWarning);
 	public static void Configure(LogConfigurator configurator) {

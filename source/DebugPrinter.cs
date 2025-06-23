@@ -1,3 +1,4 @@
+#nullable enable
 using System.Collections.Generic;
 
 namespace GodotUtils;
@@ -6,11 +7,11 @@ using Godot;
 /// Prints debug stuff, similar to Unreal Engine
 public partial class DebugPrinter : Node {
 	public static DebugPrinter? SelfCached = null;
-	
-	private int addsThisFrame = 0;
-	private Dictionary<string, Label> tracked = new();
-	private CanvasLayer canvasLayer = new();
-	private VBoxContainer container = new();
+
+	int addsThisFrame = 0;
+	Dictionary<string, Label> tracked = new();
+	CanvasLayer canvasLayer = new();
+	VBoxContainer container = new();
 
 	public override void _Ready() {
 		// Creating the container
@@ -32,18 +33,19 @@ public partial class DebugPrinter : Node {
 		}
 	}
 
-	public static void Track(Node parent, string messageId, object obj) {
+	public static void Track(Node parent, string messageId, object obj, string tag="") {
 		if (!OS.IsDebugBuild()) return;
 		var debugPrinter = GetObject();
-		string id = $"{parent.GetScript().As<Script>().ResourcePath }_{messageId}";
-		string value = obj.ToString() ?? "null";
+		string id = $"{(parent.GetScript().Obj as Script)?.GetGlobalName()??parent.GetName()}_{messageId}";
+		string tagString = tag != "" ? $"{tag}: " : "";
+		string value = $"{tagString}{obj}";
 		
 		if (debugPrinter.tracked.TryGetValue(id, out var label)) {
 			// Updating the existing label
 			label.Text = value;
 		} else {
 			// Adding a new label
-			var created = CreateLabel(value,Colors.LightSeaGreen);
+			var created = CreateLabel(value, Colors.LightSeaGreen);
 			debugPrinter.container.AddChild(created);
 			debugPrinter.container.MoveChild(created, debugPrinter.tracked.Count);
 			debugPrinter.tracked.Add(id, created);
@@ -51,8 +53,8 @@ public partial class DebugPrinter : Node {
 	}
 
 	/// More convenient than writing the full thing for short temporary stuff
-	public static void TrackTemp(Node parent, object obj) {
-		Track(parent, $"{parent.GetInstanceId()}_{obj.GetType().FullName}", obj);
+	public static void TrackTemp(Node parent, object obj, string tag="") {
+		Track(parent, $"{parent.GetInstanceId()}_{obj.GetType().FullName}", obj, tag);
 	}
 	
 	/// More convenient than writing the full thing; Used to test if a function gets called or not
@@ -101,7 +103,6 @@ public partial class DebugPrinter : Node {
 			SelfCached = new DebugPrinter();
 			SelfCached.Name = nodeName;
 			root.CallDeferred(Node.MethodName.AddChild, SelfCached, true);
-			return SelfCached;
 		}
 		return SelfCached;
 	}

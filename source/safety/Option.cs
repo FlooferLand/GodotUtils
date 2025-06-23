@@ -5,12 +5,13 @@ namespace Project;
 
 // ReSharper disable UnusedMember.Global
 public readonly struct Option<T> {
-    private readonly T value;
+    readonly T value;
 
     public bool HasValue { get; }
 
     #region Constructors
-    private Option(T value, bool hasValue) {
+
+    Option(T value, bool hasValue) {
         this.HasValue = hasValue;
         this.value = value;
     }
