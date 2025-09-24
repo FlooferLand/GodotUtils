@@ -46,8 +46,8 @@ public static class Extensions {
 	/// </summary>
 	public static Vector2 SnappyBoi(this Vector2 self, float snap = 16) {
 		return new Vector2(
-			Utils.SnappyBoi(self.X, snap),
-			Utils.SnappyBoi(self.Y, snap)
+			GdUtils.SnappyBoi(self.X, snap),
+			GdUtils.SnappyBoi(self.Y, snap)
 		);
 	}
 
@@ -137,7 +137,7 @@ public static class Extensions {
 		
 		audio.Set(
 			pitchScaleProp,
-			(1f + pitchOffset) + Utils.Random.RandfRange(-pitchRandom, pitchRandom)
+			(1f + pitchOffset) + GdUtils.Random.RandfRange(-pitchRandom, pitchRandom)
 		);
 		audio.Call(playFunc);
 	}

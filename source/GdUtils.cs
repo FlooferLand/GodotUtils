@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace GodotUtils;
 
-public static class Utils {
+public static class GdUtils {
     public static readonly RandomNumberGenerator Random = new();
 
     #region Math (vectors, random, etc)
